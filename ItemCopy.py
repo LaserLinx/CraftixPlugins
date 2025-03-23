@@ -1,7 +1,7 @@
 import os
 #os.system("pip install pyperclip")
 import pyperclip
-import inventory
+from helpers import inventory
 def copy_to_clipboard(text):
 	pyperclip.copy(text)
 		
