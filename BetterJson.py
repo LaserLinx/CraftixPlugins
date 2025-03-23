@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import scrolledtext
 import json
-from helpers import inventory
+from helpers import services
 
 
 def update():
 	try:
-		data = inventory.crafting
+		data = services.crafting
 		text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 		text_box.delete(0.0,tk.END)
 		text_box.insert(tk.END, json.dumps(data, indent=4))
@@ -22,7 +22,7 @@ def runDialog():
 	root.geometry("600x500")
 	root.configure(bg='#222222')
 	try:
-		data = inventory.crafting
+		data = services.crafting
 		text_box = scrolledtext.ScrolledText(root, bg='#333333', fg='#eeeeee', insertbackground='#eeeeee', highlightbackground='#00cccc', highlightcolor='#00cccc', wrap=tk.WORD)
 		text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 		text_box.insert(tk.END, json.dumps(data, indent=4))
