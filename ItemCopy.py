@@ -1,12 +1,12 @@
 import os
 #os.system("pip install pyperclip")
 import pyperclip
-from helpers import inventory
+from helpers import services
 def copy_to_clipboard(text):
 	pyperclip.copy(text)
 		
 def copy_selected_item():
-	item = inventory.get_selected_item()
+	item = services.get_selected_item()
 	print(f"[selected item]: {item}")
 	copy_to_clipboard(str(item))
 
