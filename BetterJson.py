@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import scrolledtext
 import json
-import inventory
+from helpers import inventory
 
 
 def update():
