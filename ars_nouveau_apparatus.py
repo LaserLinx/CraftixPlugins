@@ -13,7 +13,7 @@ structure = {
 }
 
 
-for i in range(0,47):
+for i in range(0,48):
 	structure["ars_nouveau_apparatus"][i] = ""
 SCRUCTURE = structure
 
@@ -57,7 +57,7 @@ def Generator(js):
 		rec["reagent"] = [{"item": "minecraft:dirt"}]
 	rec["output"] = {"item": str(js.get("output")),"count": int(js.get("count"))}
 	rec["pedestalItems"] = []
-	for i in range(0,47):
+	for i in range(0,48):
 		if str(js.get(str(i))) != "":
 			if str(js.get(str(i))).startswith("tag:"):
 				rec["pedestalItems"].append({"tag": str(js.get(str(i))).replace("tag:","")})
