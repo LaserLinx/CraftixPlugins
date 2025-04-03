@@ -11,7 +11,14 @@ def run():
 def rebuild():
 	internal_database = db_engine.database_path
 	db = easygui.diropenbox()
-	r=easygui.ynbox(f"Waring!!!\nThis operation DESTROY selected database ({db}) and rebuild this database to new version and replace curent Craftix3 Database are you for 100% sure Do you want to continue?\n make sure you have backup of this database.\n(after rebuild you must restart the aplication)")
+	r=easygui.ynbox(f"Waring!!!\nThis operation replace current database of craftix.\n Do you want to continue?\n(after rebuild you must restart the aplication)")
+	try:
+		shutil.rmtree("./temp")
+	except:
+		pass
+	os.mkdir("./temp")
+	shutil.copytree(db,"./temp",dirs_exist_ok=True)
+	db ="./temp"
 	if r:
 		print("Starting Building New Database")
 		for file in os.listdir(internal_database):
@@ -53,7 +60,8 @@ def rebuild():
 			except:
 				pass
 		shutil.rmtree(db)
-		print("Rebuild Done!")
+		os.mkdir("./temp")
+		exit(0)
 
 RUN_DIALOG_NAME = "Build New Database (o2n)"
 def runDialog():
