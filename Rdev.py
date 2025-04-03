@@ -332,7 +332,7 @@ def export():
 		elif isinstance(widget,OptionMenu):
 			script = script + f"\n\tct.OptionMenu(\"{widget.id}\",{str(widget.options)},{int(widget.winfo_x())},{int(widget.winfo_y())},width={int(widget.width)},height={int(widget.height)})"
 		elif isinstance(widget,CheckBox):
-			script = script + f"\n\tct.CheckBox(\"{widget.id}\",{widget.text},{int(widget.winfo_x())},{int(widget.winfo_y())},width={int(widget.width)},height={int(widget.height)})"
+			script = script + f"\n\tct.CheckBox(\"{widget.id}\",\"{widget.text}\",{int(widget.winfo_x())},{int(widget.winfo_y())},width={int(widget.width)},height={int(widget.height)})"
 		elif isinstance(widget,Switch):
 			script = script + f"\n\tct.Switch(\"{widget.id}\",{widget.text},{int(widget.winfo_x())},{int(widget.winfo_y())},width={int(widget.width)},height={int(widget.height)})"
 		elif isinstance(widget,Slider):
