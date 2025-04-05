@@ -250,6 +250,62 @@ class Slider(ctk.CTkSlider):
 		self.configure(width = self.width, height = self.height,from_=self.min,to=self.max,orientation=self.orientation)
 
 
+
+class InfinytyItemInput(ctk.CTkFrame):  # Hlavní rám
+	def __init__(self, id, x, y):
+		super().__init__(master=GetPlayground(),bg_color="#0000ff")  
+		self.place(x=x, y=y)
+		DragMode(self)
+		self.editor = ElementEditor(self,["id"],lambda: None)
+		self.bind("<Double-Button-1>", self.editor.open_editor)
+		self.parent_frame = ctk.CTkFrame(self)  # Vnější rám
+		self.parent_frame.pack(fill="both", expand=True, padx=5, pady=5)
+
+		self.scrollable_frame = ctk.CTkScrollableFrame(self.parent_frame,border_width=0,width=255)  # ScrollableFrame
+		self.scrollable_frame.pack(fill="both", expand=True)
+
+		self.id = id
+		self.update_fn()
+
+	def add(self):
+		pass
+
+
+	def update_fn(self):
+		for element in self.scrollable_frame.winfo_children():
+			element.destroy()
+
+		self.results = [{"item": "","item":""}]
+		
+		self.loop = 0
+
+		for res in self.results:
+			frame = ctk.CTkFrame(self.scrollable_frame)  # Vkládání do scrollable_frame
+			frame.pack(fill="x", side="top", pady=5, padx=5)
+
+			slot = tk.Button(
+				frame, image=I_slot00, borderwidth=0, highlightthickness=1, 
+				highlightbackground=outline_collor, highlightcolor=outline_collor, 
+				background=light_bg_color
+			)
+			slot.pack(side="left", padx=5, pady=5)
+			slot.config(command=lambda b=slot, l=self.loop: self.update_slot(b, l))
+
+			slot.config(image=I_slot00)
+			slot.image = I_slot00
+
+			del_button = ctk.CTkButton(frame, text="Delete", command=lambda r=res: self.delete(r))
+			del_button.pack(side="left", pady=5, padx=5)
+
+			self.loop += 1
+		
+		self.add_button = ctk.CTkButton(self.scrollable_frame, text="Add", command=self.add)
+		self.add_button.pack(side="top", fill="x", padx=5, pady=5)
+
+	def delete(self, r):
+		pass
+
+
 class ResultsInput(ctk.CTkFrame):  # Hlavní rám
 	def __init__(self, id, x, y):
 		super().__init__(master=GetPlayground(),bg_color="#ff0000")  
@@ -339,6 +395,8 @@ def export():
 			script = script + f"\n\tct.Slider(\"{widget.id}\",{int(widget.min)},{int(widget.max)},{int(widget.winfo_x())},{int(widget.winfo_y())},width={int(widget.width)},height={int(widget.height)},orientation={widget.orientation})"
 		elif isinstance(widget,ResultsInput):
 			script = script + f"\n\tct.ResultsInput(\"{widget.id}\",{int(widget.winfo_x())},{int(widget.winfo_y())})"
+		elif isinstance(widget,InfinytyItemInput):
+			script = script + f"\n\tct.InfinytyItemInput(\"{widget.id}\",{int(widget.winfo_x())},{int(widget.winfo_y())})"
 	
 	script = script + "\n"
 	script = script + str(generator_textbox.get(1.0,ctk.END))
@@ -377,6 +435,7 @@ def runDialog():
 	ctk.CTkButton(buttons_frame, text="Switch", command=lambda: Switch("0","exemple Switch",500,300)).pack(pady=1)
 	ctk.CTkButton(buttons_frame, text="Slider", command=lambda: Slider("0",0,100,500,300)).pack(pady=1)
 	ctk.CTkButton(buttons_frame, text="ResultInput", command=lambda: ResultsInput("0",500,300)).pack(pady=1)
+	ctk.CTkButton(buttons_frame, text="InfinytyItemInput", command=lambda: InfinytyItemInput("0",500,300)).pack(pady=1)
 	ctk.CTkButton(buttons_frame, text="Export", command=lambda: export()).pack()
 
 	scructure_frame=ctk.CTkFrame(root_top,height=598,width=400)
