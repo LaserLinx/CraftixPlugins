@@ -1,7 +1,7 @@
 #+================================+
 #|                                |
 #|      Made by: MaxTechnik       |
-#|   (Leserová práce: 0.0000001%) |
+#|                                |
 #+================================+
 import craftixtools as ct
 import json
