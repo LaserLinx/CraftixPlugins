@@ -1,8 +1,3 @@
-#+================================+
-#|                                |
-#|      Made by: MaxTechnik       |
-#|                                |
-#+================================+
 import craftixtools as ct
 import json
 def run():
